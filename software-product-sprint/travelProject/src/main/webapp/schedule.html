@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Schedule &#9200;</title>
+  <link rel="stylesheet" href="schedule-style.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+</head>
+<body onload="showTravelPics()">
+  <div id="schedule-content">
+      Schedule Here :)
+  </div>
+  <div id="form-wrapper">
+        <h1> Have you been to London? Upload places as suggestions for other users to visit</h1>
+        <form class="description" action="/upload-img" method="POST" enctype="multipart/form-data">
+            <div class="txt-field">
+                <label>Upload an image of your suggestion</label>
+                <input type="file" name="uploadedImg" class="myInput">
+            </div>
+            <div class="txt-field">
+                <label>Write a description of the picture:</label>
+                <textarea name="imgDescription" class="myInput"></textarea>
+            </div>
+            <button class="btn">Submit</button>
+        </form>
+      </div>
+    </div>
+    <br>
+    <div class="show-pics">
+        <h3>Here are some user suggestions for this city</h3>
+    </div>
+    <div id="img-json" class="travel-grid"></div>
+</body>
+<script>
+    async function showTravelPics(){
+        const responseFormServer = await fetch('/show-images');
+        const textFromResponse = await responseFormServer.json();
+        let urls = new Array(textFromResponse.length);
+        let htmlString = `<img src="${textFromResponse[0]}"/>`;
+        for(i=1; i<textFromResponse.length; i++)
+        {
+            htmlString += `<img src="${textFromResponse[i]}"/>`
+        }
+        const displayImgs = document.getElementById('img-json');
+        displayImgs.innerHTML = htmlString;
+    }
+</script>
+</html>
