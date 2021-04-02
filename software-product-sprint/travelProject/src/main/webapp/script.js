@@ -1,28 +1,50 @@
-// Copyright 2020 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
 
-/**
- * Adds a random greeting to the page.
- */
-function addRandomGreeting() {
-  const greetings =
-      ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
+var map;
+function initMap(){
+    //Map options
+    var options = {
+        zoom: 9,
+        center: {lat: 51.5074,lng: -0.1278}
+    }
+    //new map
+    map = new google.maps.Map(document.getElementById('map'), options);
+}
 
-  // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
+// This function is used specifically to show Big Ben on the map
+function addDestination(){
+    let BigBen = new Destination("Big Ben", "Famous landmark that represents London", {lat: 51.5007, lng: -0.1246}, "image")
+    BigBen.addMarker();
+}
 
-  // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
+class Destination{
+    constructor(name, info, position, image){
+        this.name = name;
+        this.info = info;
+        this.position = position;
+        this.image = image;
+    }
+    get getName(){
+        return this.name;
+    }
+    get getInfo(){
+        return this.info;
+    }
+    get getImage(){
+        return this.image;
+    }
+    addMarker(){
+        this.marker = new google.maps.Marker({
+            position: this.position,
+            map: map,
+            title: this.name
+        });
+        // This sets up the info window if we click on a marker. We can put html in conent.
+        this.infoWindow = new google.maps.InfoWindow({
+            content: this.name,
+        });
+        // If we click on the marker, it will open the info window.
+        this.marker.addListener('click', ()=>{
+            this.infoWindow.open(map, this.marker);
+        })
+    }   
 }
