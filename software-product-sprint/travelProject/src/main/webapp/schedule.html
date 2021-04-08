@@ -5,14 +5,18 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Schedule &#9200;</title>
-  <link rel="stylesheet" href="schedule-style.css">
+  <script src="script.js"></script>
+  <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 </head>
 <body onload="showTravelPics()">
-  <div id="schedule-content">
-      Schedule Here :)
-  </div>
+    <div id="schedule-display-map-container" class="display-map-container">
+        <div id="schedule-map" class="map"></div>
+        <div id="schedule-right" class="right"></div>
+    </div>
+
   <div id="form-wrapper">
         <h1> Have you been to London? Upload places as suggestions for other users to visit</h1>
         <form class="description" action="/upload-img" method="POST" enctype="multipart/form-data">
@@ -40,8 +44,7 @@
         const textFromResponse = await responseFormServer.json();
         let urls = new Array(textFromResponse.length);
         let htmlString = `<img src="${textFromResponse[0]}"/>`;
-        for(i=1; i<textFromResponse.length; i++)
-        {
+        for(i=1; i<textFromResponse.length; i++){
             htmlString += `<img src="${textFromResponse[i]}"/>`
         }
         const displayImgs = document.getElementById('img-json');

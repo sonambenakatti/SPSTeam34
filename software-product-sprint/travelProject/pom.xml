@@ -20,17 +20,6 @@
   </properties>
 
   <dependencies>
-  <!--stack overflow dependencies
-    <dependency>
-       <groupId>org.slf4j</groupId>
-       <artifactId>slf4j-api</artifactId>
-       <version>1.7.5</version>
-   </dependency>
-   <dependency>
-       <groupId>org.slf4j</groupId>
-       <artifactId>slf4j-log4j12</artifactId>
-       <version>1.7.5</version>
-   </dependency>-->
     <!-- Java Servlets API -->
     <dependency>
       <groupId>javax.servlet</groupId>
@@ -63,6 +52,13 @@
         <artifactId>google-cloud-storage</artifactId>
         <version>1.113.0</version>
     </dependency>
+    <!--Data store-->
+    <dependency>
+        <groupId>com.google.cloud</groupId>
+        <artifactId>google-cloud-datastore</artifactId>
+        <version>1.104.0</version>
+    </dependency>
+
   </dependencies>
   <build>
     <plugins>
