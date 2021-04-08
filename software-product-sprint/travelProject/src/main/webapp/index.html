@@ -2,21 +2,67 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>My Portfolio</title>
+    <title>Traveller</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
   </head>
-  <body>
-    <div id="content">
+  <body onload="lndDay1()">
+    <div id="nav-bar">
+          <div class="link">
+            <a href="#gallery">SELECT A CITY</a>
+          </div>
+          <div class="link">
+            <a href="#skill">VIEW ALL CITIES ON MAP</a>
+          </div>
+          <div class="link">
+            <a href="schedule.html">SCHEDULE</a>
+          </div>
+          <div class="link">
+            <a href="flight.html">BOOK A FLIGHT OR HOTEL</a>
+          </div>
+    </div>
+    <div class="background" id="main-background">
+        <div class="body-card">
+            <div class="card-container">
+                <div class="card">
+                    <div class="mainText">WHERE DO YOU WANT TO GO NEXT?</div>
+                    <div class="mainHdd">Travel Inspiration</div>
+                    <div class="mainDescription">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur iste eligendi facere soluta autem id itaque rem exercitationem suscipit assumenda, deserunt sed sit quia est aspernatur nisi incidunt nam sequi.</div>
+                </div>
+            </div>
+        </div> 
+    </div>
+  <div id="content">
         <!--This will be triggered when london is clicked on the main map-->
-        <a href="flight.html">Book a flight or hotel</a>
-        <h1>My Travel Project</h1>
-        <button onclick="addDestination();">Add Big Ben</button>
+
         <h1>My Google Maps</h1>
-        <div id="map"></div>
+        <div id="display-map-container" class="display-map-container">
+            <div id="map" class="map"></div>
+            <div id="right" class="right"></div>
+        </div>
+        <div class="heart-btn">
+            <div class="content">
+                <span class="heart"></span>
+                <span class="text">Like</span>
+                <span class="numb"></span>
+            </div>
+        </div>
         <script
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhZ_mmdPjA-5d-0mfPSdoqSPIdfSs68VA&callback=initMap&libraries=&v=weekly"async>
         </script>
+        <script>
+        $(document).ready(function(){
+          $('.content').click(function(){
+            $('.content').toggleClass("heart-active")
+            $('.text').toggleClass("heart-active")
+            $('.numb').toggleClass("heart-active")
+            $('.heart').toggleClass("heart-active")
+          });
+        });
+      </script>
+
     </div>
 
   </body>
