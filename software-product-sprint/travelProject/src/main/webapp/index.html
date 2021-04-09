@@ -11,7 +11,10 @@
   <body onload="lndDay1()">
     <div id="nav-bar">
           <div class="link">
-            <a href="#cityGrid">SELECT A CITY</a>
+            <a href="#gallery">SELECT A CITY</a>
+          </div>
+          <div class="link">
+            <a href="#skill">VIEW ALL CITIES ON MAP</a>
           </div>
           <div class="link">
             <a href="schedule.html">SCHEDULE</a>
@@ -33,6 +36,7 @@
     </div>
   <div id="content">
         <!--This will be triggered when london is clicked on the main map-->
+
         <h1>My Google Maps</h1>
         <div id="display-map-container" class="display-map-container">
             <div id="map" class="map"></div>
@@ -48,6 +52,18 @@
         <script
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhZ_mmdPjA-5d-0mfPSdoqSPIdfSs68VA&callback=initMap&libraries=&v=weekly"async>
         </script>
+        <script>
+        $(document).ready(function(){
+          $('.content').click(function(){
+            $('.content').toggleClass("heart-active")
+            $('.text').toggleClass("heart-active")
+            $('.numb').toggleClass("heart-active")
+            $('.heart').toggleClass("heart-active")
+          });
+        });
+      </script>
+
     </div>
+
   </body>
 </html>
