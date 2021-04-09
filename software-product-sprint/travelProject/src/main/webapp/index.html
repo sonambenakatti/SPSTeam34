@@ -14,9 +14,6 @@
             <a href="#gallery">SELECT A CITY</a>
           </div>
           <div class="link">
-            <a href="#skill">VIEW ALL CITIES ON MAP</a>
-          </div>
-          <div class="link">
             <a href="schedule.html">SCHEDULE</a>
           </div>
           <div class="link">
@@ -34,6 +31,64 @@
             </div>
         </div> 
     </div>
+    <div class="heading-body"><h2>Select a city</h2></div>
+    <div id="cityGrid">
+      <div class="city-wrapper">
+          <div class="city-background" style="background-image:url(images/london.jpg);"></div>
+          <div class="city-hdd-desc-wrapper">
+              <div class="city-title">London</div>
+              <div class="city description">
+                  London is both old and new, a place where its most ancient castle is next door to its newest skyscrapers. From the palaces of shopping to the real Buckingham Palace, London really does have it all.
+              </div>
+          </div>
+      </div>
+      <div class="city-wrapper">
+          <div class="city-background" style="background-image:url(images/newYork.jpg);"></div>
+          <div class="city-hdd-desc-wrapper">
+              <div class="city-title">New York</div>
+              <div class="city description">
+                  New York is brimming with diversity and excitement, from iconic attractions you've seen on TV and in movies to hidden gems just waiting to be discovered.
+              </div>
+          </div>
+      </div>
+      <div class="city-wrapper">
+          <div class="city-background" style="background-image:url(images/tokyo.jpg);"></div>
+          <div class="city-hdd-desc-wrapper">
+              <div class="city-title">Tokyo</div>
+              <div class="city description">
+                  Japan's capital and the world's most populous metropolis. Tokyo offers a seemingly unlimited choice of shopping, entertainment, culture, dining, excellent museums, historic temples and gardens. 
+              </div>
+          </div>
+      </div>
+      <div class="city-wrapper">
+          <div class="city-background" style="background-image:url(images/madrid.jpg);"></div>
+          <div class="city-hdd-desc-wrapper">
+              <div class="city-title">Madrid</div>
+              <div class="city description">
+                  One of the most beautiful cities in Spain and its capital.
+                  Here you'll also find a range of cultural and historical treasures such as the Royal Palace. Madrid is famous for its distinctive restaurants and cafe culture housed in beautiful historic buildings. 
+              </div>
+          </div>
+      </div>
+      <div class="city-wrapper">
+          <div class="city-background" style="background-image:url(images/mexicoCity.jpg);"></div>
+          <div class="city-hdd-desc-wrapper">
+              <div class="city-title">Mexico City</div>
+              <div class="city description">
+                  The capital of the country is one of the favorite destinations of thousands of tourists due to its cosmopolitan character, cultural, gastronomic and entertainment offer. The city with the second-highest number of museums in the world.
+              </div>
+          </div>
+      </div>
+      <div class="city-wrapper">
+          <div class="city-background" style="background-image:url(images/washingtonDC.jpg);"></div>
+          <div class="city-hdd-desc-wrapper">
+              <div class="city-title">Washington D.C.</div>
+              <div class="city description">
+                The unforgettable cityscape of Washington, D.C. is marked by some of the most famous monuments in the world. The amazing structures, statues and temples that adorn the National Esplanade in Washington, D.C., telling fascinating things through their stories and designs.
+              </div>
+          </div>
+      </div>
+  </div>
   <div id="content">
         <!--This will be triggered when london is clicked on the main map-->
 
@@ -53,17 +108,16 @@
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhZ_mmdPjA-5d-0mfPSdoqSPIdfSs68VA&callback=initMap&libraries=&v=weekly"async>
         </script>
         <script>
-        $(document).ready(function(){
-          $('.content').click(function(){
-            $('.content').toggleClass("heart-active")
-            $('.text').toggleClass("heart-active")
-            $('.numb').toggleClass("heart-active")
-            $('.heart').toggleClass("heart-active")
-          });
-        });
-      </script>
-
+          const portfolioItems = document.querySelectorAll('.city-wrapper')
+          portfolioItems.forEach(portfolioItem => {
+              portfolioItem.addEventListener('mouseover',() => {
+                  portfolioItem.childNodes[1].classList.add('img-darken');
+              })
+              portfolioItem.addEventListener('mouseout',() => {
+                  portfolioItem.childNodes[1].classList.remove('img-darken');
+              })
+          })
+        </script>
     </div>
-
   </body>
 </html>

@@ -114,7 +114,7 @@ function successFunction(data)
         siteCard += myConstructor[1];
         siteCard += '</div><button type="button" class="btn" id="btn-'
         siteCard += myConstructor[0];
-        siteCard += '">Show on map</button><button type="button" onclick="liked(\'';
+        siteCard += '">Show on map</button><button type="button" onclick="liked(\'';//onclick trigger the object's infoWindow.open(map, this.marker)
         siteCard += myConstructor[0];
         siteCard += '\',\'text';
         siteCard += singleRow;
