@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 var map;
+var markers=[];
 function initMap(){
     //Map options
     var options = {
@@ -69,13 +70,14 @@ class Destination{
             theElement.scrollIntoView();
             //this.marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
         })
+        markers.push(this.marker);
     }   
 }
 let objectDict = {};
-function lndDay1(){
+function lndDay1(city){
     
     $.ajax({
-    url: 'csvFiles/Tokyo - Sheet1.csv',
+    url: 'csvFiles/'+city+' - Sheet1.csv',
     dataType: 'text',
     }).done(successFunction);
 
@@ -157,6 +159,19 @@ function liked(lkd, theTxt, hrt){
       let writeHTML = destObject.htmlCode;
       displayRight.innerHTML = writeHTML;
     }
+
+function setMapOnAll(map) {
+  for (let i = 0; i < markers.length; i++) {
+    markers[i].setMap(map);
+  }
+}    
+
+function changeCity(city){
+    document.getElementById('right').innerHTML = "";
+    setMapOnAll(null);
+    markers=[];
+    lndDay1(city);    
+}
 
 
 
