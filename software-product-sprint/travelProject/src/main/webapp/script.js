@@ -12,8 +12,13 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
+//Global Variables
 var map;
 var markers=[];
+let objectDict = {};
+let likedCities = {};
+let htmlLikedCitiesString = "";
 function initMap(){
     //Map options
     var options = {
@@ -68,12 +73,17 @@ class Destination{
             let object_id = String(this.name);
             let theElement = document.getElementById(object_id);
             theElement.scrollIntoView();
-            //this.marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
         })
         markers.push(this.marker);
     }   
 }
-let objectDict = {};
+
+function showOnMap(selected){
+    let objToShow = objectDict[selected];
+    objToShow.infoWindow.open(map, objToShow.marker);
+}
+
+//Missing parameters of first display position on the map, depending on the city
 function lndDay1(city){
     
     $.ajax({
@@ -116,17 +126,21 @@ function successFunction(data)
         siteCard += myConstructor[1];
         siteCard += '</div><button type="button" class="btn" id="btn-'
         siteCard += myConstructor[0];
-        siteCard += '">Show on map</button><button type="button" onclick="liked(\'';//onclick trigger the object's infoWindow.open(map, this.marker)
+        siteCard += '"onclick="showOnMap(\''
+        siteCard += myConstructor[0];
+        siteCard += '\');\">Show on map</button><button type=\"button\" onclick=\"liked(\'';
         siteCard += myConstructor[0];
         siteCard += '\',\'text';
         siteCard += singleRow;
         siteCard += '\',\'hrt';
         siteCard += singleRow;
-        siteCard += '\')" class="fav" id="'; //Here we can add the other function
+        siteCard += '\'); appendSafedCitiesHTML(\''
+        siteCard += myConstructor[0];
+        siteCard += '\');" class="fav" id="';
         siteCard += myConstructor[0];
         siteCard += '"><div class="text" id="text';
         siteCard += singleRow;
-        siteCard += '">Like</div><div class="heart" id="hrt';
+        siteCard += '">Like</div><div class="heart" id="hrt'; //here
         siteCard += singleRow;
         siteCard += '"></div></button></div></div>';
         myConstructor.push(siteCard);
@@ -141,7 +155,6 @@ function successFunction(data)
 }
 function liked(lkd, theTxt, hrt){
       let lkdId = String(lkd);
-      console.log(lkdId)
       let txtId = String(theTxt);
       let hrtId = String(hrt);
       document.getElementById(lkdId).style.backgroundColor = "#c4a35a";
@@ -151,14 +164,12 @@ function liked(lkd, theTxt, hrt){
       document.getElementById(hrtId).style.backgroundPosition = "right";
       document.getElementById(hrtId).style.animation = "animate .8s steps(28) 1";
       document.getElementById(hrtId).style.color = "#000";
-      console.log(objectDict);
-      let destObject = objectDict[lkdId];
-      destObject.addMarker();
-      const displayRight = shedule.html.getElementById('schedule-right');
-      console.log(displayRight);
-      let writeHTML = destObject.htmlCode;
-      displayRight.innerHTML = writeHTML;
     }
+function appendSafedCitiesHTML(lkdId){
+    likedCities[lkdId] = objectDict[lkdId];
+    htmlLikedCitiesString += objectDict[lkdId].htmlCode;
+}
+
 
 function setMapOnAll(map) {
   for (let i = 0; i < markers.length; i++) {
@@ -170,8 +181,51 @@ function changeCity(city){
     document.getElementById('right').innerHTML = "";
     setMapOnAll(null);
     markers=[];
+    htmlLikedCitiesString = "";
+    objectDict = {};
     lndDay1(city);    
 }
 
+function showLikedPlaces(){
+    setMapOnAll(null);
+    markers=[];
+    for(let place in objectDict){
+        console.log(place);
+        if(place in likedCities){
+            let placeObj = likedCities[place]
+            console.log(placeObj);
+            placeObj.addMarker();
+        }
+    }
+    if(htmlLikedCitiesString == ""){ 
+        document.getElementById('right').innerHTML = "No liked places yet";
+    }
+    else{
+        document.getElementById('right').innerHTML = htmlLikedCitiesString;
+    }
+}
+
+function returnToAllPlaces(){
+    setMapOnAll(null);
+    markers=[];
+    let completeHTML = ""
+    let counter = 0;
+    for(let place in objectDict){
+        completeHTML += objectDict[place].htmlCode;
+        objectDict[place].addMarker();
+    }
+    document.getElementById('right').innerHTML = completeHTML;
+    for(let lkdPlace in likedCities){
+        console.log("entro");
+        let hrt = "hrt";
+        hrt += String(counter);
+        console.log(hrt);
+        let txt = "text"
+        txt += String(counter);
+        console.log(txt);
+        liked(objectDict[lkdPlace].name, txt, hrt);
+        counter++;
+    }
+}
 
 
