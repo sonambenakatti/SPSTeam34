@@ -22,7 +22,7 @@ let htmlLikedCitiesString = "";
 function initMap(){
     //Map options
     var options = {
-        zoom: 9,
+        zoom: 11,
         center: {lat: 51.5074,lng: -0.1278}
     }
     //new map
@@ -32,6 +32,8 @@ function addDestination(){
     let BigBen = new Destination("Big Ben", "Famous landmark that represents London", {lat: 51.5007, lng: -0.1246}, "image")
     BigBen.addMarker();
 }
+
+
 
 class Destination{
     constructor(name, info, position, image, timeSpent, htmlCode){
@@ -186,6 +188,7 @@ function changeCity(city){
     lndDay1(city);    
 }
 
+
 function showLikedPlaces(){
     setMapOnAll(null);
     markers=[];
@@ -227,5 +230,6 @@ function returnToAllPlaces(){
         counter++;
     }
 }
+
 
 

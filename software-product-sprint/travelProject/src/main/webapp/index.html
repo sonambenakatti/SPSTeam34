@@ -36,7 +36,7 @@
     </div>
     <div class="heading-body"><h2>Select a city</h2></div>
     <div id="cityGrid">
-      <div class="city-wrapper" onClick="changeCity('London')">
+      <div class="city-wrapper" onClick="changeCity('London'); MoveMap({coords:{lat: 51.5074, lng: -0.1278}, zoom: 11});">
           <div class="city-background" style="background-image:url(images/london.jpg);"></div>
           <div class="city-hdd-desc-wrapper">
               <div class="city-title">London</div>
@@ -45,7 +45,7 @@
               </div>
           </div>
       </div>
-      <div class="city-wrapper" onClick="changeCity('New York')">
+      <div class="city-wrapper" onClick="changeCity('New York City'); MoveMap({coords:{lat: 40.7128, lng: -74.0060}, zoom: 11});">
           <div class="city-background" style="background-image:url(images/newYork.jpg);"></div>
           <div class="city-hdd-desc-wrapper">
               <div class="city-title">New York</div>
@@ -54,7 +54,7 @@
               </div>
           </div>
       </div>
-      <div class="city-wrapper" onClick="changeCity('Tokyo')">
+      <div class="city-wrapper" onClick="changeCity('Tokyo'); MoveMap({coords:{lat: 35.6762, lng: 139.6503}, zoom: 11});">
           <div class="city-background" style="background-image:url(images/tokyo.jpg);"></div>
           <div class="city-hdd-desc-wrapper">
               <div class="city-title">Tokyo</div>
@@ -63,7 +63,7 @@
               </div>
           </div>
       </div>
-      <div class="city-wrapper" onClick="changeCity('Madrid')">
+      <div class="city-wrapper" onClick="changeCity('Madrid'); MoveMap({coords:{lat: 40.4168, lng: -3.7038}, zoom: 11});">
           <div class="city-background" style="background-image:url(images/madrid.jpg);"></div>
           <div class="city-hdd-desc-wrapper">
               <div class="city-title">Madrid</div>
@@ -73,7 +73,7 @@
               </div>
           </div>
       </div>
-      <div class="city-wrapper" onClick="changeCity('Mexico City')">
+      <div class="city-wrapper" onClick="changeCity('Mexico City'); MoveMap({coords:{lat: 19.4326, lng: -99.1332}, zoom: 11});">
           <div class="city-background" style="background-image:url(images/mexicoCity.jpg);"></div>
           <div class="city-hdd-desc-wrapper">
               <div class="city-title">Mexico City</div>
@@ -82,7 +82,7 @@
               </div>
           </div>
       </div>
-      <div class="city-wrapper" onClick="changeCity('Washington D.C.')">
+      <div class="city-wrapper" onClick="changeCity('Washington D.C.'); MoveMap({coords:{lat: 38.9072, lng: -77.0369}, zoom: 12});">
           <div class="city-background" style="background-image:url(images/washingtonDC.jpg);"></div>
           <div class="city-hdd-desc-wrapper">
               <div class="city-title">Washington D.C.</div>
