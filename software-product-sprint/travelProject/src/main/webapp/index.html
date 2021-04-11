@@ -11,13 +11,16 @@
   <body onload="lndDay1('Tokyo')">
     <div id="nav-bar">
           <div class="link">
-            <a href="#gallery">SELECT A CITY</a>
+            <a href="#cityGrid">SELECT A CITY</a>
           </div>
           <div class="link">
-            <a href="schedule.html">SCHEDULE</a>
+            <a href="#heading-map">MAP AND TRACE YOUR ROUTE</a>
           </div>
           <div class="link">
             <a href="flight.html">BOOK A FLIGHT OR HOTEL</a>
+          </div>
+          <div class="link">
+            <a href="userImgs.html">MORE TRAVEL INSPO FROM OTHER USERS</a>
           </div>
     </div>
     <div class="background" id="main-background">
@@ -84,25 +87,20 @@
           <div class="city-hdd-desc-wrapper">
               <div class="city-title">Washington D.C.</div>
               <div class="city description">
-                The unforgettable cityscape of Washington, D.C. is marked by some of the most famous monuments in the world. The amazing structures, statues and temples that adorn the National Esplanade in Washington, D.C., telling fascinating things through their stories and designs.
+                Washington, D.C. is marked by some of the most famous monuments in the world. The amazing structures, statues and temples that adorn the National Esplanade in Washington, D.C., telling fascinating things through their stories and designs.
               </div>
           </div>
       </div>
   </div>
-  <div id="content">
-        <!--This will be triggered when london is clicked on the main map-->
-
-        <h1>My Google Maps</h1>
+  <div id="content" class="background">
+        <div class="heading-body" id="heading-map"><h2>Map</h2></div>
+        <div>
+            <button onclick="showLikedPlaces();" class="btn" id="liked-btn">Show only liked places</button>
+            <button onclick="returnToAllPlaces();" class="btn" id="return-btn">Return to show all places</button>
+        </div>
         <div id="display-map-container" class="display-map-container">
             <div id="map" class="map"></div>
             <div id="right" class="right"></div>
-        </div>
-        <div class="heart-btn">
-            <div class="content">
-                <span class="heart"></span>
-                <span class="text">Like</span>
-                <span class="numb"></span>
-            </div>
         </div>
         <script
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhZ_mmdPjA-5d-0mfPSdoqSPIdfSs68VA&callback=initMap&libraries=&v=weekly"async>

@@ -5,28 +5,21 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Schedule &#9200;</title>
+  <script src="schedule-script.js"></script>
   <script src="script.js"></script>
   <link rel="stylesheet" href="style.css">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 </head>
-<body onload="showTravelPics()">
+<body onload="displayLikedPlaces()"> <!--onload="showTravelPics()"-->
     <div id="schedule-display-map-container" class="display-map-container">
         <div id="schedule-map" class="map"></div>
-        <div id="schedule-right" class="right"></div>
+        <iframe id="schedule-right" class="right"></iframe>
     </div>
-
   <div id="form-wrapper">
-        <h1> Have you been to London? Upload places as suggestions for other users to visit</h1>
+        <h1> Share inpiring travel pictures with others </h1>
         <form class="description" action="/upload-img" method="POST" enctype="multipart/form-data">
             <div class="txt-field">
-                <label>Upload an image of your suggestion</label>
+                <label>Upload your image </label>
                 <input type="file" name="uploadedImg" class="myInput">
-            </div>
-            <div class="txt-field">
-                <label>Write a description of the picture:</label>
-                <textarea name="imgDescription" class="myInput"></textarea>
             </div>
             <button class="btn">Submit</button>
         </form>
@@ -34,7 +27,7 @@
     </div>
     <br>
     <div class="show-pics">
-        <h3>Here are some user suggestions for this city</h3>
+        <h3>Here are some travel images uploaded by other users</h3>
     </div>
     <div id="img-json" class="travel-grid"></div>
 </body>
