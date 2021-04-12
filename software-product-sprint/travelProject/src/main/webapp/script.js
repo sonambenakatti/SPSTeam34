@@ -15,6 +15,8 @@
 
 //Global Variables
 var map;
+var directionsService;
+var directionsRenderer;
 var markers=[];
 let objectDict = {};
 let likedCities = {};
@@ -27,13 +29,10 @@ function initMap(){
     }
     //new map
     map = new google.maps.Map(document.getElementById('map'), options);
+    directionsService = new google.maps.DirectionsService();
+    directionsRenderer = new google.maps.DirectionsRenderer();
+    directionsRenderer.setMap(map);
 }
-function addDestination(){
-    let BigBen = new Destination("Big Ben", "Famous landmark that represents London", {lat: 51.5007, lng: -0.1246}, "image")
-    BigBen.addMarker();
-}
-
-
 
 class Destination{
     constructor(name, info, position, image, timeSpent, htmlCode){
@@ -58,6 +57,9 @@ class Destination{
     }
     get get_HTML(){
         return this.htmlCode;
+    }
+    get getPosition(){
+        return this.position;
     }
     addMarker(){
         this.marker = new google.maps.Marker({
@@ -166,10 +168,13 @@ function liked(lkd, theTxt, hrt){
       document.getElementById(hrtId).style.backgroundPosition = "right";
       document.getElementById(hrtId).style.animation = "animate .8s steps(28) 1";
       document.getElementById(hrtId).style.color = "#000";
-    }
+}
+
 function appendSafedCitiesHTML(lkdId){
-    likedCities[lkdId] = objectDict[lkdId];
-    htmlLikedCitiesString += objectDict[lkdId].htmlCode;
+    if(likedCities[lkdId] == undefined){
+        likedCities[lkdId] = objectDict[lkdId];
+        htmlLikedCitiesString += objectDict[lkdId].htmlCode;
+    }
 }
 
 
@@ -183,20 +188,25 @@ function changeCity(city){
     document.getElementById('right').innerHTML = "";
     setMapOnAll(null);
     markers=[];
+    likedCities = {};
     htmlLikedCitiesString = "";
     objectDict = {};
     lndDay1(city);    
 }
 
+function MoveMap(props){
+    map.setCenter(props.coords);
+    map.setZoom(props.zoom);
+}
 
 function showLikedPlaces(){
     setMapOnAll(null);
     markers=[];
     for(let place in objectDict){
-        console.log(place);
+        //console.log(place);
         if(place in likedCities){
             let placeObj = likedCities[place]
-            console.log(placeObj);
+            //console.log(placeObj);
             placeObj.addMarker();
         }
     }
@@ -206,6 +216,7 @@ function showLikedPlaces(){
     else{
         document.getElementById('right').innerHTML = htmlLikedCitiesString;
     }
+    Directions();    
 }
 
 function returnToAllPlaces(){
@@ -219,17 +230,45 @@ function returnToAllPlaces(){
     }
     document.getElementById('right').innerHTML = completeHTML;
     for(let lkdPlace in likedCities){
-        console.log("entro");
+        //console.log("entro");
         let hrt = "hrt";
         hrt += String(counter);
-        console.log(hrt);
+        //console.log(hrt);
         let txt = "text"
         txt += String(counter);
-        console.log(txt);
+        //console.log(txt);
         liked(objectDict[lkdPlace].name, txt, hrt);
         counter++;
     }
 }
 
+function Directions(){
+    let waypts = [];
+    for(let lkdPlace in likedCities){
+        waypts.push({
+            location: likedCities[lkdPlace].getPosition,
+            stopover: true,
+        });
+    }
 
+    if(waypts.length > 1){
+        var start = waypts.shift().location;
+        var finish = waypts.pop().location;
+
+        var request = {
+            origin: start,
+            destination: finish,
+            travelMode: 'DRIVING',
+            waypoints: waypts,
+            optimizeWaypoints: true,
+        }
+        directionsService.route(request, function(result, status) {
+            if (status == 'OK') {
+                directionsRenderer.setDirections(result);
+            }else{
+                console.log("this did not work because of " + status);
+            }
+        });
+    }
+}
 
