@@ -32,7 +32,7 @@
     <div id="img-json" class="travel-grid"></div>
 </body>
 <script>
-    async function showTravelPics(){
+    async function displayLikedPlaces(){
         const responseFormServer = await fetch('/show-images');
         const textFromResponse = await responseFormServer.json();
         let urls = new Array(textFromResponse.length);
