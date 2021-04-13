@@ -34,6 +34,7 @@ function initMap(){
     directionsRenderer.setMap(map);
 }
 
+
 class Destination{
     constructor(name, info, position, image, timeSpent, htmlCode){
         this.name = name;
@@ -146,7 +147,9 @@ function successFunction(data)
         siteCard += singleRow;
         siteCard += '">Like</div><div class="heart" id="hrt'; //here
         siteCard += singleRow;
-        siteCard += '"></div></button></div></div>';
+        siteCard += '"></div></button><div class="unlikedMessage" id="unliked'
+        siteCard += myConstructor[0];
+        siteCard += '\"></div></div></div>';
         myConstructor.push(siteCard);
         allHTMLString += siteCard;
         let newDest = new Destination(myConstructor[0], myConstructor[1], myConstructor[2], myConstructor[3],myConstructor[4], myConstructor[5]);
@@ -158,25 +161,55 @@ function successFunction(data)
 }
 }
 function liked(lkd, theTxt, hrt){
-      let lkdId = String(lkd);
-      let txtId = String(theTxt);
-      let hrtId = String(hrt);
-      document.getElementById(lkdId).style.backgroundColor = "#c4a35a";
-      document.getElementById(txtId).style.color = "#e5e5dc";
-      let change2Lkd = document.getElementById(txtId);
-      change2Lkd.innerHTML = 'Liked';
-      document.getElementById(hrtId).style.backgroundPosition = "right";
-      document.getElementById(hrtId).style.animation = "animate .8s steps(28) 1";
-      document.getElementById(hrtId).style.color = "#000";
-}
 
+    let lkdId = String(lkd);
+    let txtId = String(theTxt);
+    let hrtId = String(hrt);
+    document.getElementById(lkdId).style.backgroundColor = "#c4a35a";
+    document.getElementById(txtId).style.color = "#e5e5dc";
+    let change2Lkd = document.getElementById(txtId);
+    change2Lkd.innerHTML = 'Liked';
+    document.getElementById(hrtId).style.backgroundPosition = "right";
+    document.getElementById(hrtId).style.animation = "animate .8s steps(28) 1";
+    document.getElementById(hrtId).style.color = "#000";
+}
 function appendSafedCitiesHTML(lkdId){
-    if(likedCities[lkdId] == undefined){
+    if(likedCities[lkdId]==undefined){
         likedCities[lkdId] = objectDict[lkdId];
-        htmlLikedCitiesString += objectDict[lkdId].htmlCode;
+    }
+    else{
+        delete likedCities[lkdId];
+        unlike(objectDict[lkdId].name)
+
     }
 }
 
+function unlike(lkdId){
+    let counter = 0;
+    let theNumber;
+    for(let place in objectDict){
+        if(lkdId==objectDict[place].name){
+            theNumber = counter;
+            break;
+        }
+        counter++;
+    }
+    let txtId = "text";
+    txtId += theNumber;
+    let hrtId = "hrt";
+    hrtId += theNumber;
+    document.getElementById(lkdId).style.backgroundColor = "#26485c";
+    document.getElementById(txtId).style.color = "#26485c";
+    let change2Lkd = document.getElementById(txtId);
+    change2Lkd.innerHTML = 'Like';
+    document.getElementById(hrtId).style.backgroundPosition = "left";
+    document.getElementById(hrtId).style.transform = "transform: translate(0px, -25%)";
+    document.getElementById(hrtId).style.color = "#a0a0a0";
+    let alert = "You have unliked this place. To refresh your liked places selection click the \"Show only liked places\" button.";
+    let theId = "unliked";
+    theId += lkdId;
+    document.getElementById(theId).innerHTML = alert;
+}
 
 function setMapOnAll(map) {
   for (let i = 0; i < markers.length; i++) {
@@ -194,6 +227,7 @@ function changeCity(city){
     lndDay1(city);    
 }
 
+
 function MoveMap(props){
     map.setCenter(props.coords);
     map.setZoom(props.zoom);
@@ -202,19 +236,31 @@ function MoveMap(props){
 function showLikedPlaces(){
     setMapOnAll(null);
     markers=[];
+    let counter = 0;
+    let likedHTML = "";
     for(let place in objectDict){
-        //console.log(place);
         if(place in likedCities){
-            let placeObj = likedCities[place]
-            //console.log(placeObj);
+            let placeObj = objectDict[place];
             placeObj.addMarker();
+            console.log(placeObj.htmlCode);
+            //likedHTML += objectDict[place].htmlCode;
+            likedHTML += placeObj.htmlCode;
         }
     }
-    if(htmlLikedCitiesString == ""){ 
+    if(likedHTML == ""){ 
         document.getElementById('right').innerHTML = "No liked places yet";
     }
     else{
-        document.getElementById('right').innerHTML = htmlLikedCitiesString;
+        document.getElementById('right').innerHTML = likedHTML;
+    }
+    for(let lkdPlace in likedCities){
+        let hrt = "hrt";
+        hrt += String(counter);
+        let txt = "text"
+        txt += String(counter);
+        console.log(objectDict[lkdPlace].name);
+        liked(objectDict[lkdPlace].name, txt, hrt);
+        counter++;
     }
     Directions();    
 }
@@ -230,17 +276,17 @@ function returnToAllPlaces(){
     }
     document.getElementById('right').innerHTML = completeHTML;
     for(let lkdPlace in likedCities){
-        //console.log("entro");
+
         let hrt = "hrt";
         hrt += String(counter);
-        //console.log(hrt);
         let txt = "text"
         txt += String(counter);
-        //console.log(txt);
+
         liked(objectDict[lkdPlace].name, txt, hrt);
         counter++;
     }
 }
+
 
 function Directions(){
     let waypts = [];
@@ -271,4 +317,5 @@ function Directions(){
         });
     }
 }
+
 
