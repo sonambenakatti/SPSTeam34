@@ -61,7 +61,6 @@ public class FormHandler extends HttpServlet {
 
   /** Uploads a file to Cloud Storage and returns the uploaded file's URL. */
   private static String uploadToCloudStorage(String fileName, InputStream fileInputStream) {
-      /* I need to create the cloud storage bucket on the team's gcp!! */
     String projectId = "spring21-sps-34";
     String bucketName = "spring21-sps-34.appspot.com";
     Storage storage =
