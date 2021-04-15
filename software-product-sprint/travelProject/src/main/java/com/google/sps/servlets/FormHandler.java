@@ -47,9 +47,6 @@ public class FormHandler extends HttpServlet {
     String fileName = filePart.getSubmittedFileName() + System.currentTimeMillis();
     InputStream fileInputStream = filePart.getInputStream();
 
-    // Get the message entered by the user.
-    String message = request.getParameter("imgDescription");
-
     // Upload the file and get its URL
     String uploadedFileUrl = uploadToCloudStorage(fileName, fileInputStream);
 
@@ -59,10 +56,7 @@ public class FormHandler extends HttpServlet {
     PrintWriter out = response.getWriter();
     out.println("<p>Here's the image you uploaded:</p>");
     out.println("<a href=\"" + uploadedFileUrl + "\">");
-    out.println("<img src=\"" + uploadedFileUrl + "\" />");
-    out.println("</a>");
-    out.println("<p>Here's the text you entered:</p>");
-    out.println(message);
+    out.println("<img src=\"" + uploadedFileUrl + "\" width=\"auto\" height=\"600\" >");
   }
 
   /** Uploads a file to Cloud Storage and returns the uploaded file's URL. */

@@ -1,12 +1,8 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
 
 body{
     font-family: 'Poppins', sans-serif;
-    padding: 20px;
-}
-#schedule-content{
-    padding: 20px;
+    margin: 0px;
 }
 
 .travel-grid{
@@ -57,13 +53,12 @@ body{
 */
 #form-wrapper{
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    margin: 50px;
     border-radius: 10px;
-    background: #26485c; 
+    background: #c66b3d; 
     margin: auto;
     width: 40%;
     padding: 40px;
-    border: 3px solid #c4a35a;
+    border: 3px solid white;
     box-shadow: 0 20px 20px black, 0px 0px 50px black;
 }
 #form-wrapper h1{
@@ -71,7 +66,7 @@ body{
     text-align: center;
     padding: 0 0 20px 0;
     border-bottom: 1px solid #c4a35a;
-    color: #e5e5dc; 
+    color: white; 
     padding: 5px;
     font-size: 30px;
 }
@@ -83,15 +78,7 @@ form .txt-field{
     border-bottom: 2px solid #c4a35a;
     margin: 30px 0;
 }
-.txt-field textarea{
-    width: 80%;
-    margin-left: 10%;
-    padding: 0 5px;
-    height: 4rem;
-    padding: 10px;
-    border-radius: 10px;
-    margin-top: 15px;
-}
+
 .txt-field label{
     color: #e5e5dc;
     font-weight: 500;
@@ -104,8 +91,20 @@ form .txt-field{
 .show-pics{
     background-color: #c66b3d;
     color: white;
-    padding: 20px;
     border-radius: 10px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 20px;
+}
+.background
+{
+    padding: 35px;
+    height: 80vh;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url("images/userImageBackground.jpg");
+}
+.show-pics{
+    padding: 30px;
 }

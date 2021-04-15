@@ -4,26 +4,21 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Schedule &#9200;</title>
-  <script src="schedule-script.js"></script>
-  <script src="script.js"></script>
-  <link rel="stylesheet" href="style.css">
+  <title>User Images</title>
+  <link rel="stylesheet" href="user-style.css">
 </head>
 <body onload="displayLikedPlaces()"> <!--onload="showTravelPics()"-->
-    <div id="schedule-display-map-container" class="display-map-container">
-        <div id="schedule-map" class="map"></div>
-        <iframe id="schedule-right" class="right"></iframe>
-    </div>
-  <div id="form-wrapper">
-        <h1> Share inpiring travel pictures with others </h1>
-        <form class="description" action="/upload-img" method="POST" enctype="multipart/form-data">
-            <div class="txt-field">
-                <label>Upload your image </label>
-                <input type="file" name="uploadedImg" class="myInput">
-            </div>
-            <button class="btn">Submit</button>
-        </form>
-      </div>
+    <div class="background">
+        <div id="form-wrapper">
+            <h1> Share inpiring travel pictures with others </h1>
+            <form class="description" action="/upload-img" method="POST" enctype="multipart/form-data">
+                <div class="txt-field">
+                    <label>Upload your image </label>
+                    <input type="file" name="uploadedImg" class="myInput">
+                </div>
+                <button class="btn">Submit</button>
+            </form>
+        </div>
     </div>
     <br>
     <div class="show-pics">
